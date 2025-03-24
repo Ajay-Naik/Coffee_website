@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Menu with Cart</title>
+    <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="../codes/style.css">
+    <link rel="icon" href="../images/main/coffee_logo.png">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"rel="stylesheet"/>
+</head>
+<!-- Header & Navbar Section -->
+<header>
+    <nav>
+      <div class="nav_logo">
+        <a href="#">
+          <img src="../images/main/coffee_logo.png" alt="Coffee Logo" />
+          <h2>Sunset Cafe</h2>
+        </a>
+      </div>
+
+      <input type="checkbox" id="click" />
+      <label for="click">
+        <i class="menu_btn bx bx-menu"></i>
+        <i class="close_btn bx bx-x"></i>
+      </label>
+
+      <ul>
+          <li><a href="../codes/index.html">Home</a></li>
+          <li><a href="../codes/about.html">About</a></li>
+          <li><a href="../codes/services.html">Services</a></li>
+          <li><a href="../codes/gallery.html">Gallery</a></li>
+          <li><a href="../codes/blog.html">Blogs</a></li>
+          <li><a href="../codes/contact.html">Contact</a></li>
+      </ul>
+
+      
+</nav>
+  </header>
+
+<body>
+    <section>
+
+         <div class="menu_nav">
+            <div class="order_btn">
+              <button class="orderSummaryButton login_btn" popovertarget="orderHistory">
+                Check Order <p id="order_badge"></p>
+              </button>
+            </div>
+            <div id="orderHistory" popover>
+                <h2>Order History</h2>
+                <div id="orderSummary"></div>
+              </div>
+                 <img class="cart_icon" id="cart_icon" src="../fonts/cart.svg" onclick="toggleCart()" alt="cart" title="Cart">
+                 <span id="cartItemCount" class="cart-badge" style="display: none;" onclick="toggleCart()">0</span>
+         
+                 <span class="span">Cart</span>
+         
+                 <h1>Menu</h1>    
+                 <div class="cart" id="cart"  style="display: none;">
+                     <div id="close"><p onclick="toggleCart()">×</p></div>
+                     <h2>Cart</h2>
+                     <div id="cartItems"></div>
+                     <div class="buy">
+                         <div class="cart_total" id="cartTotal">Total: $0.00</div>
+                         <button class="pay-btn" id="PopBtn">
+                             <span class="btn-text">Check Out</span>
+                             <div class="icon-container">
+                               <svg viewBox="0 0 24 24" class="icon card-icon">
+                                 <path
+                                   d="M20,8H4V6H20M20,18H4V12H20M20,4H4C2.89,4 2,4.89 2,6V18C2,19.11 2.89,20 4,20H20C21.11,20 22,19.11 22,18V6C22,4.89 21.11,4 20,4Z"
+                                   fill="currentColor"
+                                 ></path>
+                               </svg>
+                               <svg viewBox="0 0 24 24" class="icon payment-icon">
+                                 <path
+                                   d="M2,17H22V21H2V17M6.25,7H9V6H6V3H18V6H15V7H17.75L19,17H5L6.25,7M9,10H15V8H9V10M9,13H15V11H9V13Z"
+                                   fill="currentColor"
+                                 ></path>
+                               </svg>
+                               <svg viewBox="0 0 24 24" class="icon dollar-icon">
+                                 <path
+                                   d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"
+                                   fill="currentColor"
+                                 ></path>
+                               </svg>
+                           
+                               <svg viewBox="0 0 24 24" class="icon wallet-icon default-icon">
+                                 <path
+                                   d="M21,18V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5V6H12C10.89,6 10,6.9 10,8V16A2,2 0 0,0 12,18M12,16H22V8H12M16,13.5A1.5,1.5 0 0,1 14.5,12A1.5,1.5 0 0,1 16,10.5A1.5,1.5 0 0,1 17.5,12A1.5,1.5 0 0,1 16,13.5Z"
+                                   fill="currentColor"
+                                 ></path>
+                               </svg>
+                           
+                               <svg viewBox="0 0 24 24" class="icon check-icon">
+                                 <path
+                                   d="M9,16.17L4.83,12L3.41,13.41L9,19L21,7L19.59,5.59L9,16.17Z"
+                                   fill="currentColor"
+                                 ></path>
+                               </svg>
+                             </div>
+                           </button>
+                     </div>
+                 </div>
+         
+             <div id="checkoutPopover" style="display: none;">
+         
+                 <div id="checkoutSummary">
+                     <h2>Checkout</h2>
+                     <div id="checkoutCartItems"></div>
+                     <div id="checkoutCartTotal"></div>
+                 </div>
+         
+                 <form action="orders.php" id="checkoutForm" method="post">
+                     <h3>Shipping Information</h3>
+         
+                     <label for="name" class="input_label">Name:</label>
+                     <input type="text" id="name" name="name" class="input" placeholder="Full Name">
+         
+                     <label for="address" class="input_label">Address:</label>
+                     <input type="text" class="input" name="address" id="address" placeholder="Address">
+         
+                     <label for="city" class="input_label">City:</label>
+                     <input type="text" class="input" name="city" id="city" placeholder="City">
+         
+                     <label for="zip" class="input_label">Zip Code:</label>
+                     <input type="number" class="input" name="zip" id="zip" maxlength="6" title="Please enter 6 characters only"  placeholder="Zip Code">
+         
+                     <h3>Payment Information</h3>
+                     <label for="paymentMethod" class="input_label">Choose Payment Method:</label>
+                     <div>
+                         <input type="radio" id="cod" name="paymentMethod" value="COD" checked>
+                         <label for="cod">Cash on Delivery</label>
+                     </div>
+                     <div>
+                         <input type="radio" id="upi" name="paymentMethod" value="UPI" pattern="^[a-zA-Z0-9]+@[a-zA-Z0-9]+$" title="Please enter a valid UPI ID"/>
+                         <label for="upi">UPI</label>
+                     </div>
+                     <div>
+                         <input type="radio" id="card" name="paymentMethod" value="Card">
+                         <label for="card">Credit/Debit Card</label>
+                     </div>
+         
+                     <div id="upiDetails" style="display:none;">
+                         <label for="upiId" class="input_label">UPI ID:</label>
+                         <input type="text" class="input" id="upiId" placeholder="example@upi">
+                     </div>
+         
+                     <div id="cardDetails" style="display:none;">
+                         <label for="cardNumber" class="input_label">Card Number:</label>
+                         <input type="text" class="input" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+         
+                         <label for="cardExpiry" class="input_label">Expiry Date (MM/YY):</label>
+                         <input type="text" class="input" id="cardExpiry" placeholder="MM/YY" maxlength="5">
+         
+                         <label for="cardCvc" class="input_label">CVC:</label>
+                         <div style="display: flex; align-items: center;">
+                             <input type="number" class="input" id="cardCvc" maxlength="3">
+                             <button type="button" id="cvcBtn" onclick="toggleCvcVisibility() ">Show</button>
+                         </div>
+         
+                     </div>
+         
+                     <button type="submit" id="btn">Complete Purchase</button>
+                 </form>
+         
+                 <div id="thankYouMessage" style="display: none;">
+                     <h2>Thank You for Your Order!</h2>
+                     <p>Your order has been successfully placed. 🎉</p>
+                     <p>You can check your order details anytime by clicking on <strong>“Check Order”</strong>.</p>
+                     <p>We appreciate your business and look forward to serving you again!</p>
+                 </div>
+             </div>
+         
+             <div class="navigation">
+                 <div class="menu_category">
+                     <div class="category_title active" onclick="toggleDishItems('coldBeverages')">Cold Beverages</div>
+                 </div>
+                 <div class="menu_category">
+                     <div class="category_title" onclick="toggleDishItems('hotBeverages')" >Hot Beverages</div>
+                 </div>
+                 <div class="menu_category">
+                     <div class="category_title" onclick="toggleDishItems('desserts')">Desserts</div>
+                 </div>
+                 <div class="menu_category">
+                     <div class="category_title" onclick="toggleDishItems('frenchFries')">French Fries</div>
+                 </div>
+                 <div class="menu_category">
+                     <div class="category_title" onclick="toggleDishItems('burgers')">Burgers</div>
+                 </div>
+                 <div class="menu_category">
+                     <div class="category_title" onclick="toggleDishItems('refreshments')">Refreshments</div>
+                 </div>
+                 <div class="menu_category">
+                     <div class="category_title" onclick="toggleDishItems('specialCombos')">Special Combos</div>
+                 </div>
+             </div>
+         </div>
+         <div class="clearfix">
+             <!-- cold beverages -->
+            <ul id="coldBeverages">
+              <li class="dish_item">
+                  <img src="../images/menu/cold beverages/Iced Latte.jpg" alt="Iced Latte"><br>
+                  <strong class="dish_name">Iced Latte</strong><br>
+                  <div class="dish_details">
+                 <span>Chilled espresso mixed with milk and served over ice.
+                    </span><br>
+                    <div class="dish_bottom">
+                       <strong class="dish_price">₹200</strong>
+                       <button class="add_to_cart" onclick="addToCart('Iced Latte', 200, '../images/menu/cold beverages/Iced Latte.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </li>
+            <li class="dish_item">
+                <img src="../images/menu/cold beverages/Fruit Smoothie.jpg" alt="Fruit Smoothie"><br>
+                <strong class="dish_name">Fruit Smoothie</strong><br>
+                <div class="dish_details">
+                    <span>A refreshing blend of seasonal fruits and yogurt.
+                    </span><br>
+                    <div class="dish_bottom">
+                       <strong class="dish_price">₹250</strong>
+                       <button class="add_to_cart" onclick="addToCart('Fruit Smoothie', 250, '../images/menu/cold beverages/Fruit Smoothie.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </li>
+            <li class="dish_item">
+                <img src="../images/menu/cold beverages/Iced Tea.jpg" alt="Iced Tea"><br>
+                <strong class="dish_name">Iced Tea</strong><br>
+                <div class="dish_details">
+                    <span>Brewed tea served cold, available in various flavors.</span><br>
+                    <div class="dish_bottom">
+                       <strong class="dish_price">₹205</strong>
+                       <button class="add_to_cart" onclick="addToCart('Iced Tea', 205, '../images/menu/cold beverages/Iced Tea.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </li>
+            <li class="dish_item">
+                <img src="../images/menu/cold beverages/Cold Brew Coffee.jpg" alt="Cold Brew Coffee"><br>
+                <strong class="dish_name">Cold Brew Coffee</strong><br>
+                <div class="dish_details">
+                    <span>Smooth coffee brewed with cold water for a refreshing taste.
+
+                    </span><br>
+                    <div class="dish_bottom">
+                       <strong class="dish_price">₹200</strong>
+                       <button class="add_to_cart" onclick="addToCart('Cold Brew Coffee', 200, '../images/menu/cold beverages/Cold Brew Coffee.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </li>
+            <li class="dish_item">
+                <img src="../images/menu/cold beverages/Milkshake.jpg" alt="Milkshake"><br>
+                <strong class="dish_name">Milkshake</strong><br>
+                <div class="dish_details">
+                    <span>Creamy milkshake blended with ice cream and flavors.
+
+                    </span><br>
+                    <div class="dish_bottom">
+                       <strong class="dish_price">₹250</strong>
+                       <button class="add_to_cart" onclick="addToCart('Milkshake', 250, '../images/menu/cold beverages/Milkshake.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </li>
+            <li class="dish_item">
+                <img src="../images/menu/cold beverages/Lemonade.jpg" alt="Lemonade"><br>
+                <strong class="dish_name">Lemonade</strong><br>
+                <div class="dish_details">
+                    <span>A sweet and tangy drink made from fresh lemons.
+
+                    </span><br>
+                    <div class="dish_bottom">
+                       <strong class="dish_price">₹150</strong>
+                       <button class="add_to_cart" onclick="addToCart('Lemonade', 150, '../images/menu/cold beverages/Lemonade.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </li>
+            <li class="dish_item">
+                <img src="../images/menu/cold beverages/Mango Lassi.jpg" alt="Mango Lassi"><br>
+                <strong class="dish_name">Mango Lassi</strong><br>
+                <div class="dish_details">
+                    <span>A refreshing yogurt drink blended with mango.
+
+                    </span><br>
+                    <div class="dish_bottom">
+                       <strong class="dish_price">₹200</strong>
+                       <button class="add_to_cart" onclick="addToCart('Mango Lassi', 200, '../images/menu/cold beverages/Mango Lassi.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </li>
+            <li class="dish_item">
+                <img src="../images/menu/cold beverages/Sparkling Water.jpg" alt="Sparkling Water"><br>
+                <strong class="dish_name">Sparkling Water</strong><br>
+                <div class="dish_details">
+                    <span>Crisp and bubbly mineral water, perfect for hydration.
+
+                    </span><br>
+                    <div class="dish_bottom">
+                       <strong class="dish_price">₹100</strong>
+                       <button class="add_to_cart" onclick="addToCart('Sparkling Water', 100, '../images/menu/cold beverages/Sparkling Water.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </li>
+               </ul>
+            <!-- hot beverages -->
+           <ul id="hotBeverages">
+            <li class="dish_item">
+                <img src="../images/menu/hot beverages/Espresso.png" alt="Espresso"><br>
+                <strong class="dish_name">Espresso</strong><br>
+                <div class="dish_details">
+                    <span>A strong, rich coffee served in a small cup. </span><br>
+                    <div class="dish_bottom">
+                       <strong class="dish_price">₹150</strong>
+                       <button class="add_to_cart" onclick="addToCart('Espresso', 150, '../images/menu/hot beverages/Espresso.png')">Add to Cart</button>
+                    </div>
+                </div>
+            </li>
+            <li class="dish_item">
+                <img src="../images/menu/hot beverages/Cappuccino.jpg" alt="Cappuccino"><br>
+                <strong class="dish_name">Cappuccino</strong><br>
+                <div class="dish_details">
+                    <span>A creamy blend of espresso, steamed milk, and frothy foam.                    </span><br>
+                    <div class="dish_bottom">
+                       <strong class="dish_price">₹220</strong>
+                       <button class="add_to_cart" onclick="addToCart('Cappuccino', 220, '../images/menu/hot beverages/Cappuccino.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </li>
+            <li class="dish_item">
+                <img src="../images/menu/hot beverages/Hot Chocolate.jpg" alt="Hot Chocolate"><br>
+                <strong class="dish_name">Hot Chocolate</strong><br>
+                <div class="dish_details">
+                    <span>A rich and creamy chocolate drink topped with whipped cream.
+                    </span><br>
+                    <div class="dish_bottom">
+                       <strong class="dish_price">₹180</strong>
+                       <button class="add_to_cart" onclick="addToCart('Hot Chocolate', 180, '../images/menu/hot beverages/Hot Chocolate.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </li>
+            <li class="dish_item">
+                <img src="../images/menu/hot beverages/Americano.jpg" alt="Americano"><br>
+                <strong class="dish_name">Americano</strong><br>
+                <div class="dish_details">
+                    <span>Espresso diluted with hot water for a smooth taste.
+                    </span><br>
+                    <div class="dish_bottom">
+                       <strong class="dish_price">₹180</strong>
+                       <button class="add_to_cart" onclick="addToCart('Americano', 180, '../images/menu/hot beverages/Americano.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </li>
+            <li class="dish_item">
+                <img src="../images/menu/hot beverages/Latte.jpg" alt="Latte"><br>
+                <strong class="dish_name">Latte</strong><br>
+                <div class="dish_details">
+                    <span>Espresso mixed with steamed milk and a light layer of foam.
+                    </span><br>
+                    <div class="dish_bottom">
+                       <strong class="dish_price">₹220</strong>
+                       <button class="add_to_cart" onclick="addToCart('Latte', 220, '../images/menu/hot beverages/Latte.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </li>
+            <li class="dish_item">
+                <img src="../images/menu/hot beverages/Chai Tea.jpg" alt="Chai Tea"><br>
+                <strong class="dish_name">Chai Tea</strong><br>
+                <div class="dish_details">
+                    <span>Traditional spiced Indian tea made with milk and tea leaves.
+                    </span><br>
+                    <div class="dish_bottom">
+                       <strong class="dish_price">₹100</strong>
+                       <button class="add_to_cart" onclick="addToCart('Chai Tea', 100, '../images/menu/hot beverages/Chai Tea.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </li>
+            <li class="dish_item">
+                <img src="../images/menu/hot beverages/Turmeric Latte.jpg" alt="Turmeric Latte"><br>
+                <strong class="dish_name">Turmeric Latte</strong><br>
+                <div class="dish_details">
+                    <span>A warm drink made with turmeric, milk, and spices.
+                    </span><br>
+                    <div class="dish_bottom">
+                       <strong class="dish_price">₹200</strong>
+                       <button class="add_to_cart" onclick="addToCart('Turmeric Latte', 200, '../images/menu/hot beverages/Turmeric Latte.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </li>
+            <li class="dish_item">
+                <img src="../images/menu/hot beverages/Matcha Tea.jpg" alt="Matcha Tea"><br>
+                <strong class="dish_name">Matcha Tea</strong><br>
+                <div class="dish_details">
+                    <span>A finely ground green tea powder mixed with hot water.
+                    </span><br>
+                    <div class="dish_bottom">
+                       <strong class="dish_price">₹250</strong>
+                       <button class="add_to_cart" onclick="addToCart('Matcha Tea', 250, '../images/menu/hot beverages/Matcha Tea.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </li>
+               </ul>
+            <!-- desserts -->
+           <ul id="desserts">
+            <li class="dish_item">
+                <img src="../images/menu/desserts/chocolate_cake.jpg" alt="Chocolate Cake"><br>
+                <strong class="dish_name">Chocolate Cake</strong><br>
+                <div class="dish_details">
+                    <span>Rich and moist chocolate cake with creamy frosting.</span><br>
+                    <div class="dish_bottom">
+                        <strong class="dish_price">₹200</strong>
+                        <button class="add_to_cart" onclick="addToCart('Chocolate Cake', 200, '../images/menu/desserts/chocolate_cake.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </li>
+        
+            <li class="dish_item">
+                <img src="../images/menu/desserts/cheesecake.jpg" alt="Cheesecake"><br>
+                <strong class="dish_name">Cheesecake</strong><br>
+                <div class="dish_details">
+                    <span>Creamy cheesecake on a graham cracker crust, topped with fruit.</span><br>
+                    <div class="dish_bottom">
+                        <strong class="dish_price">₹250</strong>
+                        <button class="add_to_cart" onclick="addToCart('Cheesecake', 250, '../images/menu/desserts/cheesecake.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </li>
+        
+            <li class="dish_item">
+                <img src="../images/menu/desserts/ice_cream_sundae.jpg" alt="Ice Cream Sundae"><br>
+                <strong class="dish_name">Ice Cream Sundae</strong><br>
+                <div class="dish_details">
+                    <span>A scoop of vanilla ice cream topped with chocolate sauce and nuts.</span><br>
+                    <div class="dish_bottom">
+                        <strong class="dish_price">₹180</strong>
+                        <button class="add_to_cart" onclick="addToCart('Ice Cream Sundae', 180, '../images/menu/desserts/ice_cream_sundae.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </li>
+        
+            <li class="dish_item">
+                <img src="../images/menu/desserts/brownie_ice_cream.jpg" alt="Brownie with Ice Cream"><br>
+                <strong class="dish_name">Brownie with Ice Cream</strong><br>
+                <div class="dish_details">
+                    <span>A warm brownie served with a scoop of ice cream.</span><br>
+                    <div class="dish_bottom">
+                        <strong class="dish_price">₹250</strong>
+                        <button class="add_to_cart" onclick="addToCart('Brownie with Ice Cream', 250, '../images/menu/desserts/brownie_ice_cream.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </li>
+        
+            <li class="dish_item">
+                <img src="../images/menu/desserts/tiramisu.jpg" alt="Tiramisu"><br>
+                <strong class="dish_name">Tiramisu</strong><br>
+                <div class="dish_details">
+                    <span>A classic Italian dessert made with coffee-soaked ladyfingers.</span><br>
+                    <div class="dish_bottom">
+                        <strong class="dish_price">₹300</strong>
+                        <button class="add_to_cart" onclick="addToCart('Tiramisu', 300, '../images/menu/desserts/tiramisu.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </li>
+        
+            <li class="dish_item">
+                <img src="../images/menu/desserts/fruit_tart.jpg" alt="Fruit Tart"><br>
+                <strong class="dish_name">Fruit Tart</strong><br>
+                <div class="dish_details">
+                    <span>A pastry crust filled with custard and topped with fresh fruit.</span><br>
+                    <div class="dish_bottom">
+                        <strong class="dish_price">₹250</strong>
+                        <button class="add_to_cart" onclick="addToCart('Fruit Tart', 250, '../images/menu/desserts/fruit_tart.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </li>
+        
+            <li class="dish_item">
+                <img src="../images/menu/desserts/panna_cotta.jpg" alt="Panna Cotta"><br>
+                <strong class="dish_name">Panna Cotta</strong><br>
+                <div class="dish_details">
+                    <span>A creamy Italian dessert topped with berry sauce.</span><br>
+                    <div class="dish_bottom">
+                        <strong class="dish_price">₹220</strong>
+                        <button class="add_to_cart" onclick="addToCart('Panna Cotta', 220, '../images/menu/desserts/panna_cotta.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </li>
+        
+            <li class="dish_item">
+                <img src="../images/menu/desserts/gulab_jamun.jpg" alt="Gulab Jamun"><br>
+                <strong class="dish_name">Gulab Jamun</strong><br>
+                <div class="dish_details">
+                    <span>Soft, syrup-soaked Indian sweets made from milk solids.</span><br>
+                    <div class="dish_bottom">
+                        <strong class="dish_price">₹150</strong>
+                        <button class="add_to_cart" onclick="addToCart('Gulab Jamun', 150, '../images/menu/desserts/gulab_jamun.jpg')">Add to Cart</button>
+                    </div>
+                </div>
+            </li>
+                </ul>
+            <!-- French Fries -->
+            <ul id="frenchFries">
+    <li class="dish_item">
+        <img src="../images/menu/fries/classic_fries.jpg" alt="Classic French Fries"><br>
+        <strong class="dish_name">Classic French Fries</strong><br>
+        <div class="dish_details">
+            <span>Crispy, golden fries seasoned to perfection.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹150</strong>
+                <button class="add_to_cart" onclick="addToCart('Classic French Fries', 150, '../images/menu/fries/classic_fries.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+
+    <li class="dish_item">
+        <img src="../images/menu/fries/loaded_cheese_fries.jpg" alt="Loaded Cheese Fries"><br>
+        <strong class="dish_name">Loaded Cheese Fries</strong><br>
+        <div class="dish_details">
+            <span>Fries topped with melted cheese, jalapeños, and sour cream.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹250</strong>
+                <button class="add_to_cart" onclick="addToCart('Loaded Cheese Fries', 250, '../images/menu/fries/loaded_cheese_fries.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+
+    <li class="dish_item">
+        <img src="../images/menu/fries/sweet_potato_fries.jpg" alt="Sweet Potato Fries"><br>
+        <strong class="dish_name">Sweet Potato Fries</strong><br>
+        <div class="dish_details">
+            <span>Crispy sweet potato fries served with a dipping sauce.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹220</strong>
+                <button class="add_to_cart" onclick="addToCart('Sweet Potato Fries', 220, '../images/menu/fries/sweet_potato_fries.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+
+    <li class="dish_item">
+        <img src="../images/menu/fries/garlic_parmesan_fries.jpg" alt="Garlic Parmesan Fries"><br>
+        <strong class="dish_name">Garlic Parmesan Fries</strong><br>
+        <div class="dish_details">
+            <span>Fries tossed in garlic and parmesan cheese.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹230</strong>
+                <button class="add_to_cart" onclick="addToCart('Garlic Parmesan Fries', 230, '../images/menu/fries/garlic_parmesan_fries.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+
+    <li class="dish_item">
+        <img src="../images/menu/fries/curly_fries.png" alt="Curly Fries"><br>
+        <strong class="dish_name">Curly Fries</strong><br>
+        <div class="dish_details">
+            <span>Fun, spiral-cut fries seasoned with <br>spices.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹180</strong>
+                <button class="add_to_cart" onclick="addToCart('Curly Fries', 180, '../images/menu/fries/curly_fries.png')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+
+    <li class="dish_item">
+        <img src="../images/menu/fries/chili_cheese_fries.png" alt="Chili Cheese Fries"><br>
+        <strong class="dish_name">Chili Cheese Fries</strong><br>
+        <div class="dish_details">
+            <span>Fries topped with chili and cheese <br>sauce.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹270</strong>
+                <button class="add_to_cart" onclick="addToCart('Chili Cheese Fries', 270, '../images/menu/fries/chili_cheese_fries.png')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+
+    <li class="dish_item">
+        <img src="../images/menu/fries/herbed_fries.jpg" alt="Herbed Fries"><br>
+        <strong class="dish_name">Herbed Fries</strong><br>
+        <div class="dish_details">
+            <span>Fries seasoned with a mix of herbs for extra flavor.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹200</strong>
+                <button class="add_to_cart" onclick="addToCart('Herbed Fries', 200, '../images/menu/fries/herbed_fries.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+
+    <li class="dish_item">
+        <img src="../images/menu/fries/spicy_cajun_fries.jpg" alt="Spicy Cajun Fries"><br>
+        <strong class="dish_name">Spicy Cajun Fries</strong><br>
+        <div class="dish_details">
+            <span>Fries tossed in spicy Cajun <br>seasoning.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹220</strong>
+                <button class="add_to_cart" onclick="addToCart('Spicy Cajun Fries', 220, '../images/menu/fries/spicy_cajun_fries.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+               </ul>
+            <!-- Burgers -->
+           <ul id="burgers">
+    <li class="dish_item">
+        <img src="../images/menu/burgers/classic_veggie.jpg" alt="Classic Veggie Burger"><br>
+        <strong class="dish_name">Classic Veggie Burger</strong><br>
+        <div class="dish_details">
+            <span>A flavorful vegetable patty with fresh toppings.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹200</strong>
+                <button class="add_to_cart" onclick="addToCart('Classic Veggie Burger', 200, '../images/menu/burgers/classic_veggie.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+
+    <li class="dish_item">
+        <img src="../images/menu/burgers/bbq_chicken.jpg" alt="Bacon BBQ Chicken Burger"><br>
+        <strong class="dish_name">Bacon BBQ Chicken Burger</strong><br>
+        <div class="dish_details">
+            <span>A grilled chicken burger topped with crispy bacon and tangy BBQ sauce.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹300</strong>
+                <button class="add_to_cart" onclick="addToCart('Bacon BBQ Chicken Burger', 300, '../images/menu/burgers/bbq_chicken.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+
+    <li class="dish_item">
+        <img src="../images/menu/burgers/mushroom_swiss.jpg" alt="Mushroom Swiss Burger"><br>
+        <strong class="dish_name">Mushroom Swiss Burger</strong><br>
+        <div class="dish_details">
+            <span>A chicken patty topped with sautéed mushrooms and Swiss cheese.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹280</strong>
+                <button class="add_to_cart" onclick="addToCart('Mushroom Swiss Burger', 280, '../images/menu/burgers/mushroom_swiss.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+
+    <li class="dish_item">
+        <img src="../images/menu/burgers/spicy_chicken.jpg" alt="Spicy Chicken Burger"><br>
+        <strong class="dish_name">Spicy Chicken Burger</strong><br>
+        <div class="dish_details">
+            <span>A crispy chicken patty with spicy sauce and toppings.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹300</strong>
+                <button class="add_to_cart" onclick="addToCart('Spicy Chicken Burger', 300, '../images/menu/burgers/spicy_chicken.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+
+    <li class="dish_item">
+        <img src="../images/menu/burgers/cheese_burger.jpg" alt="Cheese Burger"><br>
+        <strong class="dish_name">Cheese Burger</strong><br>
+        <div class="dish_details">
+            <span>A juicy beef or veggie patty topped with melted cheese and fresh toppings.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹280</strong>
+                <button class="add_to_cart" onclick="addToCart('Cheese Burger', 280, '../images/menu/burgers/cheese_burger.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+    
+    <li class="dish_item">
+        <img src="../images/menu/burgers/double_patty.jpg" alt="Double Patty Veggie Burger"><br>
+        <strong class="dish_name">Double Patty Veggie Burger</strong><br>
+        <div class="dish_details">
+            <span>Two vegetable patties stacked with cheese and all the fixings.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹300</strong>
+                <button class="add_to_cart" onclick="addToCart('Double Patty Veggie Burger', 300, '../images/menu/burgers/double_patty.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+
+    <li class="dish_item">
+        <img src="../images/menu/burgers/fish_burger.jpg" alt="Fish Burger"><br>
+        <strong class="dish_name">Fish Burger</strong><br>
+        <div class="dish_details">
+            <span>A crispy fish fillet with tartar sauce and lettuce.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹350</strong>
+                <button class="add_to_cart" onclick="addToCart('Fish Burger', 350, '../images/menu/burgers/fish_burger.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+
+    <li class="dish_item">
+        <img src="../images/menu/burgers/falafel.jpg" alt="Falafel Burger"><br>
+        <strong class="dish_name">Falafel Burger</strong><br>
+        <div class="dish_details">
+            <span>A crispy falafel patty served with tahini sauce and fresh veggies.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹250</strong>
+                <button class="add_to_cart" onclick="addToCart('Falafel Burger', 250, '../images/menu/burgers/falafel.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+               </ul>
+            <!-- Refreshments -->
+             <ul id="refreshments">
+    <li class="dish_item">
+        <img src="../images/menu/refreshments/Lemonade.jpg" alt="Lemonade"><br>
+        <strong class="dish_name">Lemonade</strong><br>
+        <div class="dish_details">
+            <span>A sweet and tangy drink made from fresh lemons.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹150</strong>
+                <button class="add_to_cart" onclick="addToCart('Lemonade', 150, '../images/menu/refreshments/Lemonade.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+
+    <li class="dish_item">
+        <img src="../images/menu/refreshments/sparkling_water.jpg" alt="Sparkling Water"><br>
+        <strong class="dish_name">Sparkling Water</strong><br>
+        <div class="dish_details">
+            <span>Crisp and bubbly mineral water, perfect for hydration.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹100</strong>
+                <button class="add_to_cart" onclick="addToCart('Sparkling Water', 100, '../images/menu/refreshments/sparkling_water.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+
+    <li class="dish_item">
+        <img src="../images/menu/refreshments/cold_brew_coffee.jpg" alt="Cold Brew Coffee"><br>
+        <strong class="dish_name">Cold Brew Coffee</strong><br>
+        <div class="dish_details">
+            <span>Smooth coffee brewed with cold water for a refreshing taste.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹200</strong>
+                <button class="add_to_cart" onclick="addToCart('Cold Brew Coffee', 200, '../images/menu/refreshments/cold_brew_coffee.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+
+    <li class="dish_item">
+        <img src="../images/menu/refreshments/iced_matcha_latte.jpg" alt="Iced Matcha Latte"><br>
+        <strong class="dish_name">Iced Matcha Latte</strong><br>
+        <div class="dish_details">
+            <span>A chilled version of the traditional matcha latte.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹250</strong>
+                <button class="add_to_cart" onclick="addToCart('Iced Matcha Latte', 250, '../images/menu/refreshments/iced_matcha_latte.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+
+    <li class="dish_item">
+        <img src="../images/menu/refreshments/coconut_water.jpg" alt="Coconut Water"><br>
+        <strong class="dish_name">Coconut Water</strong><br>
+        <div class="dish_details">
+            <span>Fresh coconut water served chilled for hydration.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹120</strong>
+                <button class="add_to_cart" onclick="addToCart('Coconut Water', 120, '../images/menu/refreshments/coconut_water.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+
+    <li class="dish_item">
+        <img src="../images/menu/refreshments/fruit_punch.jpg" alt="Fruit Punch"><br>
+        <strong class="dish_name">Fruit Punch</strong><br>
+        <div class="dish_details">
+            <span>A refreshing mix of various fruit <br>juices.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹180</strong>
+                <button class="add_to_cart" onclick="addToCart('Fruit Punch', 180, '../images/menu/refreshments/fruit_punch.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+
+    <li class="dish_item">
+        <img src="../images/menu/refreshments/herbal_iced_tea.jpg" alt="Herbal Iced Tea"><br>
+        <strong class="dish_name">Herbal Iced Tea</strong><br>
+        <div class="dish_details">
+            <span>Chilled herbal tea infused with fruits and herbs.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹150</strong>
+                <button class="add_to_cart" onclick="addToCart('Herbal Iced Tea', 150, '../images/menu/refreshments/herbal_iced_tea.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+
+    <li class="dish_item">
+        <img src="../images/menu/refreshments/berry_smoothie.jpg" alt="Berry Smoothie"><br>
+        <strong class="dish_name">Berry Smoothie</strong><br>
+        <div class="dish_details">
+            <span>A blend of mixed berries with yogurt and ice.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹250</strong>
+                <button class="add_to_cart" onclick="addToCart('Berry Smoothie', 250, '../images/menu/refreshments/berry_smoothie.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+               </ul>
+            <!-- specialCombos -->
+             <ul id="specialCombos">
+    <li class="dish_item">
+        <img src="../images/menu/special_combos/burger_combo.jpg" alt="Burger Combo"><br>
+        <strong class="dish_name">Burger Combo</strong><br>
+        <div class="dish_details">
+            <span>A classic cheeseburger served with fries and a drink.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹599</strong>
+                <button class="add_to_cart" onclick="addToCart('Burger Combo', 599, '../images/menu/special_combos/burger_combo.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+
+    <li class="dish_item">
+        <img src="../images/menu/special_combos/chicken_nugget_combo.jpg" alt="Chicken Nugget Combo"><br>
+        <strong class="dish_name">Chicken Nugget Combo</strong><br>
+        <div class="dish_details">
+            <span>Crispy chicken nuggets with fries and a soft drink.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹499</strong>
+                <button class="add_to_cart" onclick="addToCart('Chicken Nugget Combo', 499, '../images/menu/special_combos/chicken_nugget_combo.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+
+    <li class="dish_item">
+        <img src="../images/menu/special_combos/veggie_wrap_combo.jpg" alt="Veggie Wrap Combo"><br>
+        <strong class="dish_name">Veggie Wrap Combo</strong><br>
+        <div class="dish_details">
+            <span>A fresh veggie wrap served with a side salad and lemonade.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹550</strong>
+                <button class="add_to_cart" onclick="addToCart('Veggie Wrap Combo', 550, '../images/menu/special_combos/veggie_wrap_combo.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+
+    <li class="dish_item">
+        <img src="../images/menu/special_combos/pizza_combo.jpg" alt="Pizza Combo"><br>
+        <strong class="dish_name">Pizza Combo</strong><br>
+        <div class="dish_details">
+            <span>A personal pizza with a side of garlic bread and a drink.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹699</strong>
+                <button class="add_to_cart" onclick="addToCart('Pizza Combo', 699, '../images/menu/special_combos/pizza_combo.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+
+    <li class="dish_item">
+        <img src="../images/menu/special_combos/pasta_combo.jpg" alt="Pasta Combo"><br>
+        <strong class="dish_name">Pasta Combo</strong><br>
+        <div class="dish_details">
+            <span>A serving of pasta with a side salad and drink.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹650</strong>
+                <button class="add_to_cart" onclick="addToCart('Pasta Combo', 650, '../images/menu/special_combos/pasta_combo.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+
+    <li class="dish_item">
+        <img src="../images/menu/special_combos/fish_chips_combo.jpg" alt="Fish & Chips Combo"><br>
+        <strong class="dish_name">Fish & Chips Combo</strong><br>
+        <div class="dish_details">
+            <span>Crispy fish served with fries and a  <br>drink.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹749</strong>
+                <button class="add_to_cart" onclick="addToCart('Fish & Chips Combo', 749, '../images/menu/special_combos/fish_chips_combo.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+
+    <li class="dish_item">
+        <img src="../images/menu/special_combos/taco_combo.jpg" alt="Taco Combo"><br>
+        <strong class="dish_name">Taco Combo</strong><br>
+        <div class="dish_details">
+            <span>Three tacos with a side of chips and salsa.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹499</strong>
+                <button class="add_to_cart" onclick="addToCart('Taco Combo', 499, '../images/menu/special_combos/taco_combo.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+
+    <li class="dish_item">
+        <img src="../images/menu/special_combos/sushi_combo.jpg" alt="Sushi Combo"><br>
+        <strong class="dish_name">Sushi Combo</strong><br>
+        <div class="dish_details">
+            <span>A selection of sushi rolls with miso soup and a drink.</span><br>
+            <div class="dish_bottom">
+                <strong class="dish_price">₹799</strong>
+                <button class="add_to_cart" onclick="addToCart('Sushi Combo', 799, '../images/menu/special_combos/sushi_combo.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </li>
+                </ul>
+    </div>
+    </section>
+
+    <script src="menu.js" defer></script>
+</body>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="section_container">
+          <div class="footer_section">
+            <div class="footer_logo">
+              <a href="../codes/index.html">
+                <img src="../images/main/coffee_logo.png" alt="Coffee Logo" />
+                <h2>Sunset Cafe</h2>
+              </a>
+            </div>
+  
+            <div class="useful_links">
+              <h3>Useful Links</h3>
+              <ul>
+                <li><a href="../codes/index.html">Home</a></li>
+                <li><a href="../codes/about.html">About</a></li>
+                <li><a href="../codes/services.html">Services</a></li>
+                <ul>
+                   <li><a href="../codes/gallery.html">Gallery</a></li>
+                   <li><a href="../codes/blog.html">Blogs</a></li>
+                   <li><a href="../codes/contact.html">Contact</a></li>
+                </ul>
+              </ul>
+            </div>
+  
+            <div class="contact_us">
+              <h3>Contact</h3>
+              <ul>
+                <li>
+                  <i class="bx bx-current-location"></i>
+                  <span>Goa, India</span>
+                </li>
+                <li>
+                  <i class="bx bxs-phone-call"></i> <span><a href="tel:+919119119119" >+91 9119119119</a></span>
+                </li>
+                <li>
+                  <i class="bx bxs-time-five"></i>
+                  <span>Mon-Sun : 10:00 AM - 7:00 PM</span>
+                </li>
+              </ul>
+            </div>
+  
+            <div class="follow_us">
+              <h3>Follow</h3>
+              <i class="bx bxl-facebook-circle"></i>
+              <i class="bx bxl-twitter"></i>
+              <i class="bx bxl-instagram-alt"></i>
+            </div>
+          </div>
+        </div>
+      </footer>
+</html>
