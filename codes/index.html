@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sunset Cafe</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="confirmation.css">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="icon" href="../images/main/coffee_logo.png">
+</head>
+
+<body>
+
+  <!-- Header & Navbar Section -->
+  <header>
+    <nav>
+      <div class="nav_logo">
+        <a href="#">
+          <img src="../images/main/coffee_logo.png" alt="Coffee Logo" />
+          <h2>Sunset Cafe</h2>
+        </a>
+      </div>
+
+      <input type="checkbox" id="click" />
+      <label for="click">
+        <i class="menu_btn bx bx-menu"></i>
+        <i class="close_btn bx bx-x"></i>
+      </label>
+
+      <ul>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="blog.html">Blogs</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- main Section -->
+  <section class="main_section" id="Home">
+    <div class="section_container">
+      <div class="main_container">
+        <div class="text_section">
+          <h2>Fuel Your Passion</h2>
+          <h3>Discover the Magic in Every Cup</h3>
+          <p>
+            Welcome to our Sunset Cafe paradise, where every bean tells a story and
+            every cup sparks.
+          </p>
+
+          <div class="main_section_button">
+            <button class="button"><a href="menu.html">Order Online</a></button>
+            <button class="button" popovertarget="bookTableModal">Book A Table</button>
+          </div>
+        </div>
+        <div class="image_section">
+          <img src="../images/main/cofffee_image.png" alt="Coffee" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Popover -->
+    <div class="popover" id="bookTableModal" popover>
+      <div class="popover-content">
+        <h2>Book A Table</h2>
+        <form action="bookingtable.php" method="POST" id="bookingForm">
+          <div class="field">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Your Name" required />
+          </div>
+          <div class="field">
+            <label for="email">Your Email</label>
+            <input type="email" id="email" name="email" placeholder="youremail@gmail.com" required />
+          </div>
+          <div class="field">
+            <label for="number">Your Number</label>
+            <div class="inputs">
+              <input type="text" value="+91" class="country-code" readonly>
+              <input type="tel" id="number" name="number" placeholder="Your Contact Number" maxlength="10" required />
+            </div>
+          </div>
+          <div class="field">
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date" date.min= required />
+          </div>
+          <div class="field">
+            <label for="time">Time</label>
+            <input type="time" id="time" name="time" required />
+          </div>
+          <div class="field">
+            <label for="guests">Number of Guests</label>
+            <input type="number" id="guests" name="guests" placeholder="Number of Guests" required min="1" max="20" />
+          </div>
+          <button type="submit" class="button btn btnCenter" id="bookingSubmit">Confirm Booking</button>
+        </form>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="section_container">
+      <div class="footer_section">
+        <div class="footer_logo">
+          <a href="index.html">
+            <img src="../images/main/coffee_logo.png" alt="Coffee Logo" />
+            <h2>Sunset Cafe</h2>
+          </a>
+        </div>
+
+        <div class="useful_links">
+          <h3>Useful Links</h3>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="blog.html">Blogs</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="contact_us">
+          <h3>Contact</h3>
+          <ul>
+            <li>
+              <i class="bx bx-current-location"></i>
+              <span>Goa, India</span>
+            </li>
+            <li>
+              <i class="bx bxs-phone-call"></i> <span><a href="tel:+919119119119">+91 9119119119</a></span>
+            </li>
+            <li>
+              <i class="bx bxs-time-five"></i>
+              <span>Mon-Sun : 10:00 AM - 7:00 PM</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="follow_us">
+          <h3>Follow</h3>
+          <i class="bx bxl-facebook-circle"></i>
+          <i class="bx bxl-twitter"></i>
+          <i class="bx bxl-instagram-alt"></i>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="booking_confirm.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
