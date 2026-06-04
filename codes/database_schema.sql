@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `address` text NOT NULL,
   `city` varchar(100) NOT NULL,
   `zip_code` varchar(20) NOT NULL,
-  `payment_method` enum('Cash on Delivery','UPI','Credit/Debit Card') NOT NULL,
+  `payment_method` enum('Cash on Delivery','UPI','Card') NOT NULL,
   `upi_id` varchar(100) DEFAULT NULL,
   `card_number` varchar(20) DEFAULT NULL,
   `expiry_date` varchar(5) DEFAULT NULL,
