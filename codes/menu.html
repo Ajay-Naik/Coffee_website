@@ -156,7 +156,8 @@
 
                         <label for="cardCvc" class="input_label">CVC:</label>
                         <div style="display: flex; align-items: center;">
-                            <input type="password" class="input" id="cardCvc" maxlength="3" inputmode="numeric">
+                            <input type="password" class="input" id="cardCvc" maxlength="3" inputmode="numeric"
+                                pattern="[0-9]{3}" title="Enter a 3 digit CVC">
                             <button type="button" id="cvcBtn" onclick="toggleCvcVisibility() ">Show</button>
                         </div>
 
@@ -1023,11 +1024,9 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="services.html">Services</a></li>
-                    <ul>
-                        <li><a href="gallery.html">Gallery</a></li>
-                        <li><a href="blog.html">Blogs</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="blog.html">Blogs</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </div>
 

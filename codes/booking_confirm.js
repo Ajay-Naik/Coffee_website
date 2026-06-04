@@ -39,11 +39,10 @@ window.addEventListener("DOMContentLoaded", function () {
   const bookingForm = document.getElementById("bookingForm");
   const bookingDate = document.getElementById("date");
 
-  if (bookingDate) {
-    const today = new Date().toISOString().split("T")[0];
-
-    bookingDate.min = today;
-  }
+if (bookingDate) {
+  const today = new Date().toISOString().split("T")[0];
+  bookingDate.min = today;
+}
   if (bookingForm) {
     bookingForm.addEventListener("submit", function (e) {
       const selectedDate = document.getElementById("date").value;

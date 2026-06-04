@@ -1,6 +1,5 @@
-let orders = JSON.parse(localStorage.getItem("orders")) || [];
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
-let orderId = orders.length > 0 ? orders[orders.length - 1].orderId + 1 : 1;
+let orderId = 1;
 updateCart();
 
 // Event listener for checkout form submission
@@ -32,10 +31,7 @@ document
       alert("Please enter your UPI ID.");
       return;
     }
-    if (
-      paymentMethod === "Card" &&
-      (!cardNumber || !cardExpiry || !cardCvc)
-    ) {
+    if (paymentMethod === "Card" && (!cardNumber || !cardExpiry || !cardCvc)) {
       alert("Please fill in all card details.");
       return;
     }
@@ -66,17 +62,14 @@ document
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          console.log("Order saved to database:", data.orderId);
+          // console.log("Order saved to database:", data.orderId);
+          loadOrdersFromDatabase();
         } else {
           console.error("Database save failed:", data.message);
         }
       })
       .catch((error) => console.error("Error:", error));
 
-    // Keep in localStorage as backup
-    orders.push(order);
-    localStorage.setItem("orders", JSON.stringify(orders));
-    displayOrder(order);
     cart = [];
     localStorage.setItem("cart", JSON.stringify(cart));
     updateCart();
@@ -98,26 +91,47 @@ document
 function displayOrder(order) {
   const orderSummary = document.getElementById("orderSummary");
 
-  let itemsHtml = order.items
-    .map(
-      (item) =>
-        `<p>${item.name} - ${item.quantity} ${item.quantity > 1 ? "items" : "item"}</p>`,
-    )
-    .join("");
+  let itemsHtml = "";
+
+  if (order.items) {
+    itemsHtml = order.items
+      .map(
+        (item) => `
+      <p>
+        ${item.item_name}
+        -
+        ${item.item_quantity}
+        ${item.item_quantity > 1 ? "items" : "item"}
+      </p>
+    `,
+      )
+      .join("");
+  }
 
   orderSummary.innerHTML += `
-        <div class="order-history">
-            <p><strong>Order ID:</strong> ${order.orderId}</p>
-            <p><strong>Name:</strong> ${order.name}</p>
-            <p><strong>Address:</strong> ${order.address}</p>
-            <p><strong>City:</strong> ${order.city}</p>
-            <p><strong>Zip:</strong> ${order.zip}</p>
-            <p><strong>Payment Method:</strong> ${order.paymentMethod}</p>
-            <p><strong>Items Ordered:</strong></p>
-            ${itemsHtml}
-            <button id="cancel_order">Cancel Order</button>
-            <hr>
-        </div>`;
+    <div class="order-history">
+
+      <p><strong>Order ID:</strong> ${order.id}</p>
+
+      <p><strong>Name:</strong> ${order.full_name}</p>
+
+      <p><strong>Address:</strong> ${order.address}</p>
+
+      <p><strong>City:</strong> ${order.city}</p>
+
+      <p><strong>Zip:</strong> ${order.zip_code}</p>
+
+      <p><strong>Payment Method:</strong>
+      ${order.payment_method}</p>
+
+      <p><strong>Items Ordered:</strong></p>
+
+      ${itemsHtml}
+
+      <hr>
+
+    </div>
+  `;
 }
 
 // Function to handle checkout popover
@@ -277,52 +291,95 @@ function changeQuantity(name, change) {
 // Add item to cart
 function addToCart(name, price, img) {
   const existingItem = cart.find((item) => item.name === name);
+
   if (existingItem) {
     existingItem.quantity++;
   } else {
-    cart.push({ name, price, img, quantity: 1 });
+    cart.push({
+      name,
+      price,
+      img,
+      quantity: 1,
+    });
   }
+
   localStorage.setItem("cart", JSON.stringify(cart));
   updateCart();
 
-  //adding micro interaction in add to cart btn
-  button.textContent = "Added ✓";
-
-  setTimeout(() => {
-    button.textContent = "Add To Cart";
-  }, 1000);
-
   const toast = document.createElement("div");
 
-toast.innerText = "✓ Added to Cart";
+  toast.innerText = "✓ Added to Cart";
 
-toast.style.position = "fixed";
-toast.style.top = "20px";
-toast.style.right = "20px";
-toast.style.background = "#4CAF50";
-toast.style.color = "white";
-toast.style.padding = "12px 20px";
-toast.style.borderRadius = "8px";
-toast.style.zIndex = "9999";
+  toast.style.position = "fixed";
+  toast.style.top = "20px";
+  toast.style.right = "20px";
+  toast.style.background = "#4CAF50";
+  toast.style.color = "white";
+  toast.style.padding = "12px 20px";
+  toast.style.borderRadius = "8px";
+  toast.style.zIndex = "9999";
 
-document.body.appendChild(toast);
+  document.body.appendChild(toast);
 
-setTimeout(() => {
+  setTimeout(() => {
     toast.remove();
-}, 1500);
+  }, 1500);
+}
+
+function cancelOrder(orderId) {
+  alert("Database cancellation not implemented yet.");
+}
+
+function loadOrdersFromDatabase() {
+
+  fetch("fetch_orders.php?t=" + Date.now())
+
+    .then(response => response.json())
+
+    .then(data => {
+
+      if (!data.success) return;
+
+      const orderSummary =
+        document.getElementById("orderSummary");
+
+      orderSummary.innerHTML = "";
+
+      data.orders.forEach(order => {
+
+        fetch(
+          `fetch_orders.php?id=${order.id}&t=${Date.now()}`
+        )
+
+        .then(response => response.json())
+
+        .then(orderData => {
+
+          if (
+            orderData.success &&
+            orderData.order
+          ) {
+
+            displayOrder(
+              orderData.order
+            );
+
+          }
+
+        });
+
+      });
+
+    });
+
 }
 
 // Load previous orders on page load
 window.onload = function () {
   toggleDishItems("coldBeverages");
-  loadPreviousOrders();
+
+  loadOrdersFromDatabase();
 };
-function loadPreviousOrders() {
-  const orders = JSON.parse(localStorage.getItem("orders")) || [];
-  orders.forEach((order) => {
-    displayOrder(order);
-  });
-}
 
 // Function to buy items
 function buyItems() {
