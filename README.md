@@ -1,6 +1,30 @@
 # ☕ Sunset Cafe
 
-A full-stack cafe ordering and management system built using HTML, CSS, JavaScript, PHP, and MySQL.
+A full-stack cafe ordering and management system where customers can browse the menu, place orders, make payments, and book tables — while admins manage everything through a dedicated dashboard.
+
+🌐 **Live Demo:** [https://cafe-website.rf.gd/](https://cafe-website.rf.gd/)
+
+---
+
+## Screenshots
+
+### Home Page
+
+![Home Page](https://raw.githubusercontent.com/Ajay-Naik/Coffee_website/main/image/README/1780574796815.png)
+
+### Menu Page
+
+![Menu Page](https://raw.githubusercontent.com/Ajay-Naik/Coffee_website/main/image/README/1780574811591.png)
+
+### Order History
+
+![Order History](https://raw.githubusercontent.com/Ajay-Naik/Coffee_website/main/image/README/1780584801212.png)
+
+### Admin Dashboard
+
+![Admin Dashboard](https://raw.githubusercontent.com/Ajay-Naik/Coffee_website/main/image/README/1780574853422.png)
+
+---
 
 ## Features
 
@@ -26,23 +50,7 @@ A full-stack cafe ordering and management system built using HTML, CSS, JavaScri
 - Ordered Items & Quantities
 - Paginated Order Listing
 
-## Screenshots
-
-### Home Page
-
-![1780574796815](image/README/1780574796815.png)
-
-### Menu Page
-
-![1780574811591](image/README/1780574811591.png)
-
-### Order History
-
-![1780584801212](image/README/1780584801212.png)
-
-### Admin Dashboard
-
-![1780574853422](image/README/1780574853422.png)
+---
 
 ## Tech Stack
 
@@ -63,6 +71,8 @@ A full-stack cafe ordering and management system built using HTML, CSS, JavaScri
 ### Development Environment
 
 - XAMPP
+
+---
 
 ## Database Structure
 
@@ -95,6 +105,8 @@ Stores table reservation information.
 
 Stores contact form submissions.
 
+---
+
 ## Security
 
 - PDO Prepared Statements
@@ -103,12 +115,14 @@ Stores contact form submissions.
 - Only Last 4 Card Digits Stored
 - Database Credentials Excluded from Git
 
+---
+
 ## Installation
 
 ### 1. Clone Repository
 
 ```bash
-https://github.com/Ajay-Naik/Coffee_website.git
+git clone https://github.com/Ajay-Naik/Coffee_website.git
 ```
 
 ### 2. Import Database
@@ -129,19 +143,7 @@ database_schema.sql
 
 ### 3. Configure Database
 
-Copy:
-
-```text
-connect.example.php
-```
-
-to:
-
-```text
-connect.php
-```
-
-Update credentials:
+Copy `connect.example.php` to `connect.php` and update credentials:
 
 ```php
 $host = "localhost";
@@ -158,27 +160,13 @@ Place project in:
 xampp/htdocs/
 ```
 
-Start:
-
-- Apache
-- MySQL
-
-Open:
+Start Apache and MySQL in XAMPP, then open:
 
 ```text
 http://localhost/coffee_website/codes/index.html
 ```
 
-## Project Highlights
-
-- Responsive Design
-- Dynamic Shopping Cart
-- MySQL Order Storage
-- Order History System
-- Admin Order Details Modal
-- Card / UPI / COD Support
-- Table Reservation System
-- Contact Form Integration
+---
 
 ## Future Improvements
 
@@ -188,6 +176,9 @@ http://localhost/coffee_website/codes/index.html
 - Sales Analytics Dashboard
 - Inventory Management
 
+---
+
 ## Author
 
 **Ajay Naik**
+[GitHub](https://github.com/Ajay-Naik)
