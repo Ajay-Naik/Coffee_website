@@ -73,7 +73,7 @@ if (bookingDate) {
       "Booking Confirmed!",
       "Your table has been booked. We look forward to serving you!",
       "success",
-      3000,
+      2000,
     );
     // Clear the URL parameter
     window.history.replaceState({}, document.title, window.location.pathname);
@@ -82,14 +82,14 @@ if (bookingDate) {
       "Incomplete Information",
       "Please fill in all required booking details.",
       "error",
-      3000,
+      2000,
     );
   } else if (msg === "booking_error") {
     showConfirmation(
       "Booking Error",
       "Sorry, there was an error. Please try again.",
       "error",
-      3000,
+      2000,
     );
   }
 });

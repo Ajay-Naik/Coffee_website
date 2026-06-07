@@ -41,7 +41,7 @@ window.addEventListener('DOMContentLoaded', function() {
             'Message Sent!', 
             'Thank you! We will get back to you soon.', 
             'success', 
-            3000
+            2000
         );
         // Clear the URL parameter
         window.history.replaceState({}, document.title, window.location.pathname);
@@ -50,21 +50,21 @@ window.addEventListener('DOMContentLoaded', function() {
             'Email Required', 
             'Please provide your email address.', 
             'error', 
-            3000
+            2000
         );
     } else if (msg === 'db_error') {
         showConfirmation(
             'Error', 
             'Sorry, there was an error. Please try again.', 
             'error', 
-            3000
+            2000
         );
     } else if (msg === 'invalid_request') {
         showConfirmation(
             'Invalid Request', 
             'Please submit the form properly.', 
             'error', 
-            3000
+            2000
         );
     }
 });
